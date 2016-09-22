@@ -25,12 +25,14 @@
 @synthesize tblPlace;
 @synthesize srcPlace;
 
-@synthesize lblPlaceTitle;
+@synthesize lblPlaceTitle, lblPlaceTitle2, lblPlaceTitle3;
 
 //map
 @synthesize viewMap;
-@synthesize imgMap;
 @synthesize scrMap;
+
+@synthesize viewMapList;
+@synthesize tblMapList;
 
 //buddy
 @synthesize viewBuddy;
@@ -49,6 +51,10 @@
     [viewMap setHidden:YES];
     [self.view addSubview:viewMap];
     
+    [viewMapList setFrame:CGRectMake(0, 0, viewMapList.frame.size.width, viewMapList.frame.size.height)];
+    [viewMapList setHidden:YES];
+    [self.view addSubview:viewMapList];
+    
     [viewBuddy setFrame:CGRectMake(0, 0, viewBuddy.frame.size.width, viewBuddy.frame.size.height)];
     [viewBuddy setHidden:YES];
     [self.view addSubview:viewBuddy];
@@ -60,15 +66,42 @@
     //splash
     //[NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(goMain) userInfo:nil repeats:NO];
     
-    aryPlace = [[NSMutableArray alloc]initWithObjects:@"TEST 1",@"TEST 2",@"TEST 3", nil];
+    //aryPlace = [[NSMutableArray alloc]initWithObjects:@"TEST 1",@"TEST 2",@"TEST 3", nil];
     aryFilterPlace = [[NSMutableArray alloc] init];
+    [self displayPlaceData];
     
     aryBuddy = [[NSMutableArray alloc]initWithObjects:@"BUDDY 1",@"BUDDY 2",@"BUDDY 3", nil];
     aryFilterBuddy = [[NSMutableArray alloc] init];
     
-    [self filterPlace:@""];
+    aryMapList = [[NSMutableArray alloc]initWithObjects:@"BUDDY 1",@"BUDDY 2",@"BUDDY 3", nil];
+    aryFilterMapList = [[NSMutableArray alloc] init];
     
     tmrAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animatePoint) userInfo:nil repeats:YES];
+}
+
+-(void) displayPlaceData
+{
+    NSDictionary *dict1 = @{
+                            @"title": @"Big Bad Wolf",
+                            @"image": @"place1.jpg",
+                            @"period": @"21 - 25 January 2016"
+                            };
+    
+    NSDictionary *dict2 = @{
+                            @"title": @"Comic Con",
+                            @"image": @"place2.jpg",
+                            @"period": @"21 - 25 January 2016"
+                            };
+    
+    NSDictionary *dict3 = @{
+                            @"title": @"Comic Fiesta",
+                            @"image": @"place3.jpg",
+                            @"period": @"21 - 25 January 2016"
+                            };
+    
+    aryPlace = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, nil];
+    
+    [self filterPlace:@""];
 }
 
 - (void)goMain
@@ -84,6 +117,9 @@
     }else if (tableView==tblBuddy)
     {
         return [aryFilterBuddy count];
+    }else if (tableView==tblMapList)
+    {
+        return [aryFilterMapList count];
     }
     return 0;
 }
@@ -112,23 +148,24 @@
         [cell addSubview:lblBG];
         
         UIImageView *imgPlace = [[UIImageView alloc] init];
-        [imgPlace setFrame:CGRectMake(20, 20, 100, 80)];
+        [imgPlace setFrame:CGRectMake(10, 10, 110, 100)];
         [imgPlace setBackgroundColor:[UIColor redColor]];
-        [imgPlace setImage:[UIImage imageNamed:@""]];
+        [imgPlace setImage:[UIImage imageNamed:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"image"]]];
         [imgPlace setContentMode:UIViewContentModeScaleAspectFill];
+        [imgPlace setClipsToBounds:YES];
         [cell addSubview:imgPlace];
         
         UITextView *txtPlace = [[UITextView alloc] init];
         [txtPlace setFrame:CGRectMake(125, 20, 180, 45)];
-        [txtPlace setText:[aryFilterPlace objectAtIndex:indexPath.row]];
-        [txtPlace setFont:[UIFont boldSystemFontOfSize:15]];
+        [txtPlace setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"title"]];
+        [txtPlace setFont:[UIFont boldSystemFontOfSize:20]];
         [txtPlace setUserInteractionEnabled:NO];
         [cell addSubview:txtPlace];
         
         UILabel *lblDate = [[UILabel alloc] init];
-        [lblDate setFrame:CGRectMake(130, 75, 180, 20)];
-        [lblDate setText:[aryFilterPlace objectAtIndex:indexPath.row]];
-        [lblDate setFont:[UIFont systemFontOfSize:12]];
+        [lblDate setFrame:CGRectMake(130, 78-10, 180, 20)];
+        [lblDate setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"period"]];
+        [lblDate setFont:[UIFont systemFontOfSize:14]];
         [cell addSubview:lblDate];
         
         UILabel *lblSeparator = [[UILabel alloc] init];
@@ -139,16 +176,40 @@
         
     }else if (tableView==tblBuddy)
     {
-        UILabel *lblCard = [[UILabel alloc] init];
-        [lblCard setFrame:CGRectMake(20, 10, 300, 20)];
-        [lblCard setText:[aryFilterBuddy objectAtIndex:indexPath.row]];
-        [cell addSubview:lblCard];
+        UIImageView *imgPic = [[UIImageView alloc] init];
+        [imgPic setFrame:CGRectMake(15, 10, 70, 70)];
+        [imgPic setBackgroundColor:[UIColor redColor]];
+        [imgPic setImage:[UIImage imageNamed:@""]];
+        [imgPic setContentMode:UIViewContentModeScaleAspectFill];
+        [imgPic.layer setCornerRadius:35];
+        [imgPic.layer setMasksToBounds:YES];
+        [cell addSubview:imgPic];
+        
+        UILabel *lblName = [[UILabel alloc] init];
+        [lblName setFrame:CGRectMake(105, 20, 200, 20)];
+        [lblName setText:[aryFilterBuddy objectAtIndex:indexPath.row]];
+        [lblName setFont:[UIFont boldSystemFontOfSize:17]];
+        [cell addSubview:lblName];
+        
+        UILabel *lblDes = [[UILabel alloc] init];
+        [lblDes setFrame:CGRectMake(105, 47, 200, 20)];
+        [lblDes setText:[aryFilterBuddy objectAtIndex:indexPath.row]];
+        [lblDes setFont:[UIFont systemFontOfSize:14]];
+        [lblDes setTextColor:[UIColor lightGrayColor]];
+        [cell addSubview:lblDes];
         
         UILabel *lblSeparator = [[UILabel alloc] init];
-        [lblSeparator setFrame:CGRectMake(15, 39, tblBuddy.frame.size.width-30, 1)];
-        [lblSeparator setBackgroundColor:[UIColor darkGrayColor]];
+        [lblSeparator setFrame:CGRectMake(95, 84, tblBuddy.frame.size.width-110, 1)];
+        [lblSeparator setBackgroundColor:[UIColor lightGrayColor]];
         [cell addSubview:lblSeparator];
         
+    }else if (tableView==tblMapList)
+    {
+        UILabel *lblName = [[UILabel alloc] init];
+        [lblName setFrame:CGRectMake(25, 20, 270, 20)];
+        [lblName setText:[aryFilterMapList objectAtIndex:indexPath.row]];
+        [lblName setFont:[UIFont boldSystemFontOfSize:17]];
+        [cell addSubview:lblName];
     }
     return cell;
 }
@@ -159,12 +220,44 @@
     
     if (tableView==tblPlace)
     {
-        [viewMap setHidden:NO];
-        [self setUpMapRouteContent];
+        [self.view endEditing:YES];
+        [lblPlaceTitle setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"title"]];
+        [lblPlaceTitle2 setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"title"]];
+        [lblPlaceTitle3 setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"title"]];
+        [viewMapList setHidden:NO];
+        
+        [self filterMaplist:@""];
     }else if (tableView==tblBuddy)
     {
         
+    }else if (tableView==tblMapList)
+    {
+        [self.view endEditing:YES];
+        [self btnMapView:nil];
     }
+}
+
+-(IBAction)btnBackMap:(id)sender
+{
+    [viewMap setHidden:YES];
+}
+
+-(IBAction)btnBackMapList:(id)sender
+{
+    [viewMapList setHidden:YES];
+}
+
+-(IBAction)btnMapView:(id)sender
+{
+    [viewMapList setHidden:YES];
+    [viewMap setHidden:NO];
+    [self setUpMapRouteContent];
+}
+
+-(IBAction)btnMapList:(id)sender
+{
+    [viewMap setHidden:YES];
+    [viewMapList setHidden:NO];
 }
 
 -(void) setUpMapRouteContent
@@ -202,6 +295,13 @@
 -(IBAction)btnBackBuddyList:(id)sender
 {
     [viewBuddy setHidden:YES];
+}
+
+-(IBAction)btnBackMain:(id)sender
+{
+    [viewBuddy setHidden:YES];
+    [viewMapList setHidden:YES];
+    [viewMap setHidden:YES];
 }
 
 -(IBAction)btnPath1:(id)sender
@@ -354,7 +454,7 @@
     for (int x=0; x<[aryPlace count]; x++)
     {
         //compare substring
-        NSString *strPlace = [aryPlace objectAtIndex:x];
+        NSString *strPlace = [[aryPlace objectAtIndex:x] objectForKey:@"title"];
         
         if ([[strPlace uppercaseString] rangeOfString:[strText uppercaseString]].location != NSNotFound || [strText isEqualToString:@""])
         {
@@ -380,6 +480,23 @@
     }
     [tblBuddy reloadData];
     NSLog(@"aryFilterBuddy::%@::",aryFilterBuddy);
+}
+
+-(void) filterMaplist:(NSString *)strText
+{
+    [aryFilterMapList removeAllObjects];
+    for (int x=0; x<[aryMapList count]; x++)
+    {
+        //compare substring
+        NSString *strPlace = [aryMapList objectAtIndex:x];
+        
+        if ([[strPlace uppercaseString] rangeOfString:[strText uppercaseString]].location != NSNotFound || [strText isEqualToString:@""])
+        {
+            [aryFilterMapList addObject:[aryMapList objectAtIndex:x]];
+        }
+    }
+    [tblMapList reloadData];
+    NSLog(@"tblMapList::%@::",aryFilterMapList);
 }
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText

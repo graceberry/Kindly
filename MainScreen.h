@@ -11,11 +11,12 @@
 
 @interface MainScreen : UIViewController
 {
-    NSMutableArray *aryPlace, *aryFilterPlace;
+    NSMutableArray *aryPlace, *aryFilterPlace, *aryMapList, *aryFilterMapList;
     NSMutableArray *aryBuddy, *aryFilterBuddy;
     
     UIView *viewMapRoute, *viewPointLocation;
     int intAniCount;
+    UIImageView *imgMap;
     
     NSTimer *tmrAnimation;
     UIImageView *imgPoint;
@@ -29,12 +30,14 @@
 @property (nonatomic, retain) IBOutlet UITableView *tblPlace;
 @property (nonatomic, retain) IBOutlet UISearchBar *srcPlace;
 
-@property (nonatomic, retain) IBOutlet UILabel *lblPlaceTitle;
+@property (nonatomic, retain) IBOutlet UILabel *lblPlaceTitle, *lblPlaceTitle2, *lblPlaceTitle3;
 
 //map
 @property (nonatomic, retain) IBOutlet UIView *viewMap;
-@property (nonatomic, retain) IBOutlet UIImageView *imgMap;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrMap;
+
+@property (nonatomic, retain) IBOutlet UIView *viewMapList;
+@property (nonatomic, retain) IBOutlet UITableView *tblMapList;
 
 //buddy
 @property (nonatomic, retain) IBOutlet UIView *viewBuddy;
