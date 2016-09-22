@@ -38,6 +38,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *viewMapList;
 @property (nonatomic, retain) IBOutlet UITableView *tblMapList;
+@property (nonatomic, retain) IBOutlet UISearchBar *srcMapList;
 
 //buddy
 @property (nonatomic, retain) IBOutlet UIView *viewBuddy;

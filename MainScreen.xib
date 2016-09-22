@@ -12,6 +12,7 @@
                 <outlet property="lblPlaceTitle3" destination="9mo-x7-MBL" id="j70-Bd-F5h"/>
                 <outlet property="scrMap" destination="R4Q-Ky-FWL" id="mOs-KD-el5"/>
                 <outlet property="srcBuddy" destination="5oW-tK-Ukl" id="fxk-KZ-Hhf"/>
+                <outlet property="srcMapList" destination="SoD-yu-FY8" id="Oae-10-m36"/>
                 <outlet property="srcPlace" destination="o1q-ps-Gee" id="vSA-vT-EDQ"/>
                 <outlet property="tblBuddy" destination="HbS-po-vhQ" id="nrh-Tu-4V8"/>
                 <outlet property="tblMapList" destination="KdY-bV-GqW" id="ZRI-hf-Vio"/>
@@ -327,6 +328,14 @@
                     <rect key="frame" x="0.0" y="100" width="320" height="468"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <searchBar key="tableHeaderView" contentMode="redraw" id="SoD-yu-FY8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="V3g-L2-dpn"/>
+                        </connections>
+                    </searchBar>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Aa1-vV-r7g"/>
                         <outlet property="delegate" destination="-1" id="XXs-NJ-7fy"/>

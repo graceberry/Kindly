@@ -33,6 +33,7 @@
 
 @synthesize viewMapList;
 @synthesize tblMapList;
+@synthesize srcMapList;
 
 //buddy
 @synthesize viewBuddy;
@@ -82,13 +83,13 @@
 -(void) displayPlaceData
 {
     NSDictionary *dict1 = @{
-                            @"title": @"Big Bad Wolf",
+                            @"title": @"Food Festival 2016",
                             @"image": @"place1.jpg",
                             @"period": @"21 - 25 January 2016"
                             };
     
     NSDictionary *dict2 = @{
-                            @"title": @"Comic Con",
+                            @"title": @"Big Bad Wolf",
                             @"image": @"place2.jpg",
                             @"period": @"21 - 25 January 2016"
                             };
@@ -99,7 +100,13 @@
                             @"period": @"21 - 25 January 2016"
                             };
     
-    aryPlace = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, nil];
+    NSDictionary *dict4 = @{
+                            @"title": @"Comic Con",
+                            @"image": @"place4.jpg",
+                            @"period": @"21 - 25 January 2016"
+                            };
+    
+    aryPlace = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, dict4, nil];
     
     [self filterPlace:@""];
 }
@@ -140,7 +147,7 @@
     //Event Table
     if (tableView==tblPlace)
     {
-        [cell setBackgroundColor:[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1]];
+        [cell setBackgroundColor:[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1]];
         
         UILabel *lblBG = [[UILabel alloc] init];
         [lblBG setFrame:CGRectMake(10, 10, 300, 100)];
@@ -156,7 +163,7 @@
         [cell addSubview:imgPlace];
         
         UITextView *txtPlace = [[UITextView alloc] init];
-        [txtPlace setFrame:CGRectMake(125, 20, 180, 45)];
+        [txtPlace setFrame:CGRectMake(122, 20, 185, 50)];
         [txtPlace setText:[[aryFilterPlace objectAtIndex:indexPath.row] objectForKey:@"title"]];
         [txtPlace setFont:[UIFont boldSystemFontOfSize:20]];
         [txtPlace setUserInteractionEnabled:NO];
@@ -171,7 +178,7 @@
         UILabel *lblSeparator = [[UILabel alloc] init];
         [lblSeparator setFrame:CGRectMake(15, 110, 295, 2)];
         [lblSeparator setBackgroundColor:[UIColor darkGrayColor]];
-        [lblSeparator setAlpha:0.6];
+        [lblSeparator setAlpha:0.3];
         [cell addSubview:lblSeparator];
         
     }else if (tableView==tblBuddy)
@@ -309,6 +316,13 @@
     [self setUpMapRouteContent];
     [self createPathStartPoint:@"A"];
     [self createBeaconAtPoint:@"A"];
+}
+
+-(IBAction)btnPath2:(id)sender
+{
+    [self setUpMapRouteContent];
+    [self createPathStartPoint:@"B"];
+    [self createBeaconAtPoint:@"B"];
 }
 
 //Draw Path Way
@@ -507,6 +521,9 @@
     }else if(srcBuddy==theSearchBar)
     {
         [self filterBuddy:searchText];
+    }else if(srcMapList==theSearchBar)
+    {
+        [self filterMaplist:searchText];
     }
 }
 
@@ -542,7 +559,6 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    NSLog(@"here");
     return [viewMapRoute viewWithTag:ZOOM_VIEW_TAG];
 }
 
