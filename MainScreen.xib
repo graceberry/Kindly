@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreen">
             <connections>
                 <outlet property="imgMap" destination="rxA-NZ-EO2" id="QIv-fS-OLk"/>
+                <outlet property="scrMap" destination="R4Q-Ky-FWL" id="mOs-KD-el5"/>
                 <outlet property="srcBuddy" destination="5oW-tK-Ukl" id="fxk-KZ-Hhf"/>
                 <outlet property="srcPlace" destination="o1q-ps-Gee" id="vSA-vT-EDQ"/>
                 <outlet property="tblBuddy" destination="HbS-po-vhQ" id="nrh-Tu-4V8"/>
@@ -101,6 +102,9 @@
                     <rect key="frame" x="32" y="46" width="80" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="btnPath1:" destination="-1" eventType="touchUpInside" id="U3v-Te-Fan"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1fH-hd-bx0">
                     <rect key="frame" x="120" y="46" width="80" height="35"/>
@@ -121,11 +125,11 @@
                     </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="R4Q-Ky-FWL">
-                    <rect key="frame" x="8" y="105" width="304" height="432"/>
+                    <rect key="frame" x="8" y="105" width="300" height="400"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rxA-NZ-EO2">
-                            <rect key="frame" x="0.0" y="0.0" width="304" height="432"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_map_2.jpg" id="rxA-NZ-EO2">
+                            <rect key="frame" x="0.0" y="-7" width="300" height="400"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
@@ -180,4 +184,7 @@
             <point key="canvasLocation" x="638" y="997"/>
         </view>
     </objects>
+    <resources>
+        <image name="event_map_2.jpg" width="1603" height="3136"/>
+    </resources>
 </document>

@@ -24,6 +24,7 @@
 //map
 @synthesize viewMap;
 @synthesize imgMap;
+@synthesize scrMap;
 
 //buddy
 @synthesize viewBuddy;
@@ -128,10 +129,24 @@
     if (tableView==tblPlace)
     {
         [viewMap setHidden:NO];
+        [self setUpMapRouteContent];
     }else if (tableView==tblBuddy)
     {
         
     }
+}
+
+-(void) setUpMapRouteContent
+{
+    if(viewMapRoute!=nil)
+    {
+        [viewMapRoute removeFromSuperview];
+    }
+    
+    viewMapRoute = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrMap.frame.size.width, scrMap.frame.size.height)];
+    [viewMapRoute setBackgroundColor:[UIColor redColor]];
+    [viewMapRoute setAlpha:0.5];
+    [scrMap addSubview:viewMapRoute];
 }
 
 -(IBAction)btnBuddyList:(id)sender
@@ -145,6 +160,64 @@
     [viewBuddy setHidden:YES];
 }
 
+-(IBAction)btnPath1:(id)sender
+{
+    [self createPathStartPoint:CGPointMake(62, 220) withEndPoint:CGPointMake(62, 305) withColor:[UIColor blueColor] withStation:3];
+}
+
+//Draw Path Way
+- (void)createPathStartPoint:(CGPoint)pointStartLocation withEndPoint:(CGPoint)pointEndLocation withColor:(UIColor *)pathColor withStation:(int)intStation
+{
+    //Draw Path
+    UIBezierPath *trackPath = [UIBezierPath bezierPath];
+    [trackPath moveToPoint:CGPointMake(pointStartLocation.x, pointStartLocation.y)];
+    [trackPath addLineToPoint:CGPointMake(pointEndLocation.x, pointEndLocation.y)];
+    
+    CAShapeLayer *centerline = [CAShapeLayer layer];
+    [centerline setPath:trackPath.CGPath];
+    [centerline setStrokeColor:pathColor.CGColor];
+    [centerline setFillColor:[[UIColor clearColor] CGColor]];
+    [centerline setLineWidth:10];
+    [viewMapRoute.layer addSublayer:centerline];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    [animation setDuration:5];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [animation setAutoreverses:NO];
+    [animation setFromValue:[NSNumber numberWithFloat:0]];
+    [animation setToValue:[NSNumber numberWithFloat:1]];
+    [centerline addAnimation:animation forKey:@"animatePath"];
+    
+}
+
+/*-(IBAction)btnRemove:(id)sender
+{
+    if(viewMapRoute!=nil)
+    {
+        [viewMapRoute removeFromSuperview];
+    }
+    
+    viewMapRoute = [[UIView alloc] initWithFrame:CGRectMake(0, 100, 320, 320)];
+    [viewMapRoute setBackgroundColor:[UIColor clearColor]];
+    [viewMapRoute setAlpha:0.5];
+    [viewPassengerAnnouncement addSubview:viewMapRoute];
+    
+    [viewPassengerAnnouncement bringSubviewToFront:btnStation1];
+    [viewPassengerAnnouncement bringSubviewToFront:btnStation2];
+    [viewPassengerAnnouncement bringSubviewToFront:btnStation3];
+    [viewPassengerAnnouncement bringSubviewToFront:btnStation4];
+    
+    [btnStation1 setImage:[UIImage imageNamed:@"train_icon_select.png"] forState:UIControlStateNormal];
+    [btnStation2 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
+    [btnStation3 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
+    [btnStation4 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
+    
+    [imgStation1 setImage:[UIImage imageNamed:@"station_name_select.png"]];
+    [imgStation2 setImage:[UIImage imageNamed:@"station_name.png"]];
+    [imgStation3 setImage:[UIImage imageNamed:@"station_name.png"]];
+    [imgStation4 setImage:[UIImage imageNamed:@"station_name.png"]];
+    [imgAd1 setImage:[UIImage imageNamed:@"ad1.png"]];
+}*/
 
 -(void) filterPlace:(NSString *)strText
 {

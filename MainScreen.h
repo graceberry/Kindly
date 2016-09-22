@@ -13,6 +13,8 @@
 {
     NSMutableArray *aryPlace, *aryFilterPlace;
     NSMutableArray *aryBuddy, *aryFilterBuddy;
+    
+    UIView *viewMapRoute;
 }
 
 //splash
@@ -26,6 +28,7 @@
 //map
 @property (nonatomic, retain) IBOutlet UIView *viewMap;
 @property (nonatomic, retain) IBOutlet UIImageView *imgMap;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrMap;
 
 //buddy
 @property (nonatomic, retain) IBOutlet UIView *viewBuddy;
