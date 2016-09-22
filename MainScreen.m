@@ -291,6 +291,11 @@
     float minimumScale = [scrMap frame].size.width  / [viewMapRoute frame].size.width;
     [scrMap setMinimumZoomScale:minimumScale];
     [scrMap setZoomScale:0.156250];
+    
+    UIButton *btnBurger = [[UIButton alloc] init];
+    [btnBurger setFrame:CGRectMake(365, 487, 200, 300)];
+    [btnBurger setImage:[UIImage imageNamed:@"popup_burger.png"] forState:UIControlStateNormal];
+    [viewMapRoute addSubview:btnBurger];
 }
 
 -(IBAction)btnBuddyList:(id)sender

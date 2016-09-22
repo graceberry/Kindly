@@ -20,6 +20,9 @@
 		CC2199251D94769600F49A29 /* place3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC2199231D94769600F49A29 /* place3.jpg */; };
 		CC2199271D9476A100F49A29 /* place1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC2199261D9476A100F49A29 /* place1.jpg */; };
 		CC21992A1D94773100F49A29 /* place4 in Resources */ = {isa = PBXBuildFile; fileRef = CC2199291D94773100F49A29 /* place4 */; };
+		CC2199341D94933A00F49A29 /* popup_ice_cream.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199311D94933A00F49A29 /* popup_ice_cream.png */; };
+		CC2199351D94933A00F49A29 /* popup_burger.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199321D94933A00F49A29 /* popup_burger.png */; };
+		CC2199361D94933A00F49A29 /* popup_popcorn.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199331D94933A00F49A29 /* popup_popcorn.png */; };
 		CCCE564F1D93E3F700D38A3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE564E1D93E3F700D38A3F /* main.m */; };
 		CCCE56521D93E3F800D38A3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE56511D93E3F800D38A3F /* AppDelegate.m */; };
 		CCCE56551D93E3F800D38A3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE56541D93E3F800D38A3F /* ViewController.m */; };
@@ -41,6 +44,9 @@
 		CC2199231D94769600F49A29 /* place3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place3.jpg; sourceTree = "<group>"; };
 		CC2199261D9476A100F49A29 /* place1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place1.jpg; sourceTree = "<group>"; };
 		CC2199291D94773100F49A29 /* place4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = place4; sourceTree = "<group>"; };
+		CC2199311D94933A00F49A29 /* popup_ice_cream.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_ice_cream.png; sourceTree = "<group>"; };
+		CC2199321D94933A00F49A29 /* popup_burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_burger.png; sourceTree = "<group>"; };
+		CC2199331D94933A00F49A29 /* popup_popcorn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_popcorn.png; sourceTree = "<group>"; };
 		CCCE564A1D93E3F700D38A3F /* Kindly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCCE564E1D93E3F700D38A3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCCE56501D93E3F700D38A3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -93,6 +99,9 @@
 		CC21991B1D94728700F49A29 /* place */ = {
 			isa = PBXGroup;
 			children = (
+				CC2199311D94933A00F49A29 /* popup_ice_cream.png */,
+				CC2199321D94933A00F49A29 /* popup_burger.png */,
+				CC2199331D94933A00F49A29 /* popup_popcorn.png */,
 				CC2199291D94773100F49A29 /* place4 */,
 				CC2199261D9476A100F49A29 /* place1.jpg */,
 				CC2199221D94769600F49A29 /* place2.jpg */,
@@ -212,15 +221,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC2199021D93E52100F49A29 /* MainScreen.xib in Resources */,
+				CC2199341D94933A00F49A29 /* popup_ice_cream.png in Resources */,
 				CC2199251D94769600F49A29 /* place3.jpg in Resources */,
 				CC2199181D946ACE00F49A29 /* list_button.png in Resources */,
 				CC2199241D94769600F49A29 /* place2.jpg in Resources */,
 				CC2199141D944F6F00F49A29 /* locationtracker_blue.png in Resources */,
 				CC21992A1D94773100F49A29 /* place4 in Resources */,
 				CCCE565A1D93E3F800D38A3F /* Assets.xcassets in Resources */,
+				CC2199361D94933A00F49A29 /* popup_popcorn.png in Resources */,
 				CC2199041D93E56A00F49A29 /* Default-568h@2x.png in Resources */,
 				CC2199101D943F8000F49A29 /* event_map_1_resize.jpg in Resources */,
 				CC2199161D944F7700F49A29 /* locationtracker_area.png in Resources */,
+				CC2199351D94933A00F49A29 /* popup_burger.png in Resources */,
 				CC21991A1D946AD500F49A29 /* map_button.png in Resources */,
 				CC2199121D944F6700F49A29 /* locationtracker_white.png in Resources */,
 				CC2199271D9476A100F49A29 /* place1.jpg in Resources */,
