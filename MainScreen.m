@@ -68,13 +68,16 @@
     //[NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(goMain) userInfo:nil repeats:NO];
     
     //aryPlace = [[NSMutableArray alloc]initWithObjects:@"TEST 1",@"TEST 2",@"TEST 3", nil];
+    aryPlace = [[NSMutableArray alloc] init];
     aryFilterPlace = [[NSMutableArray alloc] init];
     [self displayPlaceData];
     
-    aryBuddy = [[NSMutableArray alloc]initWithObjects:@"BUDDY 1",@"BUDDY 2",@"BUDDY 3", nil];
+    //aryBuddy = [[NSMutableArray alloc]initWithObjects:@"Mummy \nStatus: Active",@"BUDDY 2",@"BUDDY 3", nil];
+    aryBuddy = [[NSMutableArray alloc] init];
     aryFilterBuddy = [[NSMutableArray alloc] init];
+    [self displayBuddyData];
     
-    aryMapList = [[NSMutableArray alloc]initWithObjects:@"BUDDY 1",@"BUDDY 2",@"BUDDY 3", nil];
+    aryMapList = [[NSMutableArray alloc]initWithObjects:@"109    Subway Malaysia", @"110    Juicework", @"111    Shilin", @"112    I love yoo!", @"113    Baskin Robin", @"114    Best Nasi Lemak", @"115    Ice cream stall", @"116    SawadeeCup", @"117    Pine & Wine", @"118    Latte Art", @"119    Tokyo Secret", @"120    Cake Sence",@"121    Popcorn Stall", @"122    New Zealand Natural",@"123    Burger Stall", nil];
     aryFilterMapList = [[NSMutableArray alloc] init];
     
     tmrAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animatePoint) userInfo:nil repeats:YES];
@@ -109,6 +112,37 @@
     aryPlace = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, dict4, nil];
     
     [self filterPlace:@""];
+}
+
+-(void) displayBuddyData
+{
+    NSDictionary *dict1 = @{
+                            @"name": @"Mummy",
+                            @"image": @"place2.jpg",
+                            @"status": @"Active"
+                            };
+    
+    NSDictionary *dict2 = @{
+                            @"name": @"Taylor Swift",
+                            @"image": @"place2.jpg",
+                            @"status": @"Inactive"
+                            };
+    
+    NSDictionary *dict3 = @{
+                            @"name": @"Princess",
+                            @"image": @"place3.jpg",
+                            @"status": @"Inactive"
+                            };
+    
+    NSDictionary *dict4 = @{
+                            @"name": @"Cammy Tang",
+                            @"image": @"place4.jpg",
+                            @"status": @"Inactive"
+                            };
+    
+    aryBuddy = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, dict4, nil];
+    
+    [self filterBuddy:@""];
 }
 
 - (void)goMain
@@ -186,7 +220,7 @@
         UIImageView *imgPic = [[UIImageView alloc] init];
         [imgPic setFrame:CGRectMake(15, 10, 70, 70)];
         [imgPic setBackgroundColor:[UIColor redColor]];
-        [imgPic setImage:[UIImage imageNamed:@""]];
+        [imgPic setImage:[UIImage imageNamed:[[aryFilterBuddy objectAtIndex:indexPath.row] objectForKey:@"image"]]];
         [imgPic setContentMode:UIViewContentModeScaleAspectFill];
         [imgPic.layer setCornerRadius:35];
         [imgPic.layer setMasksToBounds:YES];
@@ -194,13 +228,13 @@
         
         UILabel *lblName = [[UILabel alloc] init];
         [lblName setFrame:CGRectMake(105, 20, 200, 20)];
-        [lblName setText:[aryFilterBuddy objectAtIndex:indexPath.row]];
+        [lblName setText:[[aryFilterBuddy objectAtIndex:indexPath.row] objectForKey:@"name"]];
         [lblName setFont:[UIFont boldSystemFontOfSize:17]];
         [cell addSubview:lblName];
         
         UILabel *lblDes = [[UILabel alloc] init];
         [lblDes setFrame:CGRectMake(105, 47, 200, 20)];
-        [lblDes setText:[aryFilterBuddy objectAtIndex:indexPath.row]];
+        [lblDes setText:[[aryFilterBuddy objectAtIndex:indexPath.row] objectForKey:@"status"]];
         [lblDes setFont:[UIFont systemFontOfSize:14]];
         [lblDes setTextColor:[UIColor lightGrayColor]];
         [cell addSubview:lblDes];
@@ -236,11 +270,25 @@
         [self filterMaplist:@""];
     }else if (tableView==tblBuddy)
     {
-        
+        [viewBuddy setHidden:YES];
+        [viewMapList setHidden:YES];
+        [viewMap setHidden:NO];
+        [self btnPath2:nil];
     }else if (tableView==tblMapList)
     {
         [self.view endEditing:YES];
         [self btnMapView:nil];
+        
+        if ([[aryFilterMapList objectAtIndex:indexPath.row] isEqualToString:@"115    Ice cream stall"])
+        {
+            [self btnIcecream:nil];
+        }else if ([[aryFilterMapList objectAtIndex:indexPath.row] isEqualToString:@"121    Popcorn Stall"])
+        {
+            [self btnPopcorn:nil];
+        }else if ([[aryFilterMapList objectAtIndex:indexPath.row] isEqualToString:@"123    Burger Stall"])
+        {
+            [self btnBurger:nil];
+        }
     }
 }
 
@@ -292,10 +340,67 @@
     [scrMap setMinimumZoomScale:minimumScale];
     [scrMap setZoomScale:0.156250];
     
+    UIButton *btnClearTap = [[UIButton alloc] init];
+    [btnClearTap setFrame:CGRectMake(0, 0, 600, 800)];
+    [btnClearTap setBackgroundColor:[UIColor clearColor]];
+    [btnClearTap setAlpha:0.4];
+    [btnClearTap addTarget:self action:@selector(btnClearAll:) forControlEvents:UIControlEventTouchUpInside];
+    [viewMapRoute addSubview:btnClearTap];
+    
+    UIButton *btnIcecreamTap = [[UIButton alloc] init];
+    [btnIcecreamTap setFrame:CGRectMake(173, 150, 127, 64)];
+    [btnIcecreamTap setBackgroundColor:[UIColor clearColor]];
+    [btnIcecreamTap setAlpha:0.4];
+    [btnIcecreamTap addTarget:self action:@selector(btnIcecream:) forControlEvents:UIControlEventTouchUpInside];
+    [viewMapRoute addSubview:btnIcecreamTap];
+    
+    UIButton *btnPopcornTap = [[UIButton alloc] init];
+    [btnPopcornTap setFrame:CGRectMake(169, 390, 65, 64)];
+    [btnPopcornTap setBackgroundColor:[UIColor clearColor]];
+    [btnPopcornTap setAlpha:0.4];
+    [btnPopcornTap addTarget:self action:@selector(btnPopcorn:) forControlEvents:UIControlEventTouchUpInside];
+    [viewMapRoute addSubview:btnPopcornTap];
+    
+    UIButton *btnBurgerTap = [[UIButton alloc] init];
+    [btnBurgerTap setFrame:CGRectMake(298, 458, 65, 64)];
+    [btnBurgerTap setBackgroundColor:[UIColor clearColor]];
+    [btnBurgerTap setAlpha:0.4];
+    [btnBurgerTap addTarget:self action:@selector(btnBurger:) forControlEvents:UIControlEventTouchUpInside];
+    [viewMapRoute addSubview:btnBurgerTap];
+}
+
+-(IBAction)btnClearAll:(id)sender
+{
+    [self setUpMapRouteContent];
+}
+-
+(IBAction)btnBurger:(id)sender
+{
+    [self setUpMapRouteContent];
     UIButton *btnBurger = [[UIButton alloc] init];
-    [btnBurger setFrame:CGRectMake(365, 487, 200, 300)];
+    [btnBurger setFrame:CGRectMake(365, 487-150, 200, 300)];
     [btnBurger setImage:[UIImage imageNamed:@"popup_burger.png"] forState:UIControlStateNormal];
+    [btnBurger addTarget:self action:@selector(btnPath1:) forControlEvents:UIControlEventTouchUpInside];
     [viewMapRoute addSubview:btnBurger];
+}
+
+-(IBAction)btnIcecream:(id)sender
+{
+    [self setUpMapRouteContent];
+    UIButton *btnIcecream = [[UIButton alloc] init];
+    [btnIcecream setFrame:CGRectMake(301, 184-150, 200, 300)];
+    [btnIcecream setImage:[UIImage imageNamed:@"popup_ice_cream.png"] forState:UIControlStateNormal];
+    [btnIcecream addTarget:self action:@selector(btnPath3:) forControlEvents:UIControlEventTouchUpInside];
+    [viewMapRoute addSubview:btnIcecream];
+}
+
+-(IBAction)btnPopcorn:(id)sender
+{
+    [self setUpMapRouteContent];
+    UIButton *btnPopcorn = [[UIButton alloc] init];
+    [btnPopcorn setFrame:CGRectMake(234, 423-150, 200, 300)];
+    [btnPopcorn setImage:[UIImage imageNamed:@"popup_popcorn.png"] forState:UIControlStateNormal];
+    [viewMapRoute addSubview:btnPopcorn];
 }
 
 -(IBAction)btnBuddyList:(id)sender
@@ -330,6 +435,13 @@
     [self createBeaconAtPoint:@"B"];
 }
 
+-(IBAction)btnPath3:(id)sender
+{
+    [self setUpMapRouteContent];
+    [self createPathStartPoint:@"C"];
+    [self createBeaconAtPoint:@"C"];
+}
+
 //Draw Path Way
 - (void)createPathStartPoint:(NSString *)strPath
 {
@@ -349,6 +461,13 @@
         [trackPath addLineToPoint:CGPointMake(337, 247)];
         [trackPath addLineToPoint:CGPointMake(445, 247)];
         [trackPath addLineToPoint:CGPointMake(445, 458)];
+    }else if ([strPath isEqualToString:@"C"])
+    {
+        [trackPath moveToPoint:CGPointMake(119, 438)];
+        [trackPath addLineToPoint:CGPointMake(145, 438)];
+        [trackPath addLineToPoint:CGPointMake(145, 246)];
+        [trackPath addLineToPoint:CGPointMake(238, 246)];
+        [trackPath addLineToPoint:CGPointMake(238, 215)];
     }
     
     CAShapeLayer *centerline = [CAShapeLayer layer];
@@ -378,6 +497,14 @@
     [imgPoint setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
 }
 
+-(void) Apath1
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    [viewPointLocation setFrame:CGRectMake(145-50, 438-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
 - (void) Apath2
 {
     [UIView beginAnimations:@"swipe" context:NULL];
@@ -402,6 +529,14 @@
     [UIView commitAnimations];
 }
 
+- (void) Bpath1
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [viewPointLocation setFrame:CGRectMake(337-50, 247-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
 - (void) Bpath2
 {
     [UIView beginAnimations:@"swipe" context:NULL];
@@ -418,6 +553,38 @@
     [UIView commitAnimations];
 }
 
+-(void) Cpath1
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    [viewPointLocation setFrame:CGRectMake(145-50, 438-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Cpath2
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [viewPointLocation setFrame:CGRectMake(145-50, 246-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Cpath3
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    [viewPointLocation setFrame:CGRectMake(238-50, 246-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Cpath4
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    [viewPointLocation setFrame:CGRectMake(238-50, 215-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
 - (void) createBeaconAtPoint:(NSString *) strPoint
 {
     if (viewPointLocation !=nil)
@@ -429,27 +596,31 @@
     {
         viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(119-50, 438-50, 100, 100)];
         
-        [UIView beginAnimations:@"swipe" context:NULL];
-        [UIView setAnimationDuration:0.2f];
-        [viewPointLocation setFrame:CGRectMake(145-50, 438-50, 100, 100)];
-        [UIView commitAnimations];
+        [self performSelector:@selector(Apath1) withObject:nil afterDelay:1];
         
-        [self performSelector:@selector(Apath2) withObject:nil afterDelay:0.4];
-        [self performSelector:@selector(Apath3) withObject:nil afterDelay:1.6];
-        [self performSelector:@selector(Apath4) withObject:nil afterDelay:4.8];
+        [self performSelector:@selector(Apath2) withObject:nil afterDelay:1.4];
+        [self performSelector:@selector(Apath3) withObject:nil afterDelay:2.6];
+        [self performSelector:@selector(Apath4) withObject:nil afterDelay:5.8];
         
     }else if ([strPoint isEqualToString:@"B"])
     {
         viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(337-50, 216-50, 100, 100)];
         
-        [UIView beginAnimations:@"swipe" context:NULL];
-        [UIView setAnimationDuration:1.0f];
-        [viewPointLocation setFrame:CGRectMake(337-50, 247-50, 100, 100)];
-        [UIView commitAnimations];
+        [self performSelector:@selector(Bpath1) withObject:nil afterDelay:1];
         
-        [self performSelector:@selector(Bpath2) withObject:nil afterDelay:1.2];
-        [self performSelector:@selector(Bpath3) withObject:nil afterDelay:3.4];
+        [self performSelector:@selector(Bpath2) withObject:nil afterDelay:2.2];
+        [self performSelector:@selector(Bpath3) withObject:nil afterDelay:4.4];
+    }else if ([strPoint isEqualToString:@"C"])
+    {
+        viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(119-50, 438-50, 100, 100)];
+        
+        [self performSelector:@selector(Cpath1) withObject:nil afterDelay:1];
+        
+        [self performSelector:@selector(Cpath2) withObject:nil afterDelay:2.2];
+        [self performSelector:@selector(Cpath3) withObject:nil afterDelay:3.4];
+        [self performSelector:@selector(Cpath4) withObject:nil afterDelay:4.1];
     }
+    
     [viewMapRoute addSubview:viewPointLocation];
     
     UIImageView *imgArea = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationtracker_area.png"]];
@@ -490,7 +661,7 @@
     for (int x=0; x<[aryBuddy count]; x++)
     {
         //compare substring
-        NSString *strPlace = [aryBuddy objectAtIndex:x];
+        NSString *strPlace = [[aryBuddy objectAtIndex:x] objectForKey:@"name"];
         
         if ([[strPlace uppercaseString] rangeOfString:[strText uppercaseString]].location != NSNotFound || [strText isEqualToString:@""])
         {
