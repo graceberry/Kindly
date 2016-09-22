@@ -11,34 +11,25 @@
 
 @interface MainScreen : UIViewController
 {
-    //gesture
-    CGPoint startLocation;
-    int intAtPage;
-    
-    NSMutableArray *aryKindFeed, *aryEvent, *aryReward, *aryProfile;
-    
-    UIRefreshControl *rfcKindFeed, *rfcEvent, *rfcReward;
+    NSMutableArray *aryPlace, *aryFilterPlace;
+    NSMutableArray *aryBuddy, *aryFilterBuddy;
 }
 
 //splash
 @property (nonatomic, retain) IBOutlet UIView *viewSplash;
 
-//top tab
-@property (nonatomic, retain) IBOutlet UIView *viewTab;
-@property (nonatomic, retain) IBOutlet UIButton *btnKindFeed, *btnEvent, *btnReward;
-@property (nonatomic, retain) UILabel *lblTabline;
+//place
+@property (nonatomic, retain) IBOutlet UIView *viewPlace;
+@property (nonatomic, retain) IBOutlet UITableView *tblPlace;
+@property (nonatomic, retain) IBOutlet UISearchBar *srcPlace;
 
-//kindfeed
-@property (nonatomic, retain) IBOutlet UIView *viewKindFeed;
-@property (nonatomic, retain) IBOutlet UITableView *tblKindFeed;
+//map
+@property (nonatomic, retain) IBOutlet UIView *viewMap;
+@property (nonatomic, retain) IBOutlet UIImageView *imgMap;
 
-//event
-@property (nonatomic, retain) IBOutlet UIView *viewEvent;
-@property (nonatomic, retain) IBOutlet UITableView *tblEvent;
-
-//reward
-@property (nonatomic, retain) IBOutlet UIView *viewReward;
-@property (nonatomic, retain) IBOutlet UITableView *tblReward;
-
+//buddy
+@property (nonatomic, retain) IBOutlet UIView *viewBuddy;
+@property (nonatomic, retain) IBOutlet UITableView *tblBuddy;
+@property (nonatomic, retain) IBOutlet UISearchBar *srcBuddy;
 
 @end
