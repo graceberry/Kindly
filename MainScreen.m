@@ -25,6 +25,8 @@
 @synthesize tblPlace;
 @synthesize srcPlace;
 
+@synthesize lblPlaceTitle;
+
 //map
 @synthesize viewMap;
 @synthesize imgMap;
@@ -102,14 +104,37 @@
     //Event Table
     if (tableView==tblPlace)
     {
-        UILabel *lblCard = [[UILabel alloc] init];
-        [lblCard setFrame:CGRectMake(20, 10, 300, 20)];
-        [lblCard setText:[aryFilterPlace objectAtIndex:indexPath.row]];
-        [cell addSubview:lblCard];
+        [cell setBackgroundColor:[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1]];
+        
+        UILabel *lblBG = [[UILabel alloc] init];
+        [lblBG setFrame:CGRectMake(10, 10, 300, 100)];
+        [lblBG setBackgroundColor:[UIColor whiteColor]];
+        [cell addSubview:lblBG];
+        
+        UIImageView *imgPlace = [[UIImageView alloc] init];
+        [imgPlace setFrame:CGRectMake(20, 20, 100, 80)];
+        [imgPlace setBackgroundColor:[UIColor redColor]];
+        [imgPlace setImage:[UIImage imageNamed:@""]];
+        [imgPlace setContentMode:UIViewContentModeScaleAspectFill];
+        [cell addSubview:imgPlace];
+        
+        UITextView *txtPlace = [[UITextView alloc] init];
+        [txtPlace setFrame:CGRectMake(125, 20, 180, 45)];
+        [txtPlace setText:[aryFilterPlace objectAtIndex:indexPath.row]];
+        [txtPlace setFont:[UIFont boldSystemFontOfSize:15]];
+        [txtPlace setUserInteractionEnabled:NO];
+        [cell addSubview:txtPlace];
+        
+        UILabel *lblDate = [[UILabel alloc] init];
+        [lblDate setFrame:CGRectMake(130, 75, 180, 20)];
+        [lblDate setText:[aryFilterPlace objectAtIndex:indexPath.row]];
+        [lblDate setFont:[UIFont systemFontOfSize:12]];
+        [cell addSubview:lblDate];
         
         UILabel *lblSeparator = [[UILabel alloc] init];
-        [lblSeparator setFrame:CGRectMake(15, 39, tblPlace.frame.size.width-30, 1)];
+        [lblSeparator setFrame:CGRectMake(15, 110, 295, 2)];
         [lblSeparator setBackgroundColor:[UIColor darkGrayColor]];
+        [lblSeparator setAlpha:0.6];
         [cell addSubview:lblSeparator];
         
     }else if (tableView==tblBuddy)
@@ -181,8 +206,9 @@
 
 -(IBAction)btnPath1:(id)sender
 {
-    [self createPathStartPoint:@"B"];
-    [self createBeaconAtPoint:@"B"];
+    [self setUpMapRouteContent];
+    [self createPathStartPoint:@"A"];
+    [self createBeaconAtPoint:@"A"];
 }
 
 //Draw Path Way
@@ -221,7 +247,6 @@
     [dashAnimation setDuration:0.75f];
     [dashAnimation setRepeatCount:HUGE_VAL];
     [centerline addAnimation:dashAnimation forKey:@"linePhase"];
-    
 }
 
 - (void) animatePoint
@@ -234,9 +259,78 @@
     [imgPoint setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
 }
 
+- (void) Apath2
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:1.0f];
+    [viewPointLocation setFrame:CGRectMake(145-50, 550-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Apath3
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:3.0f];
+    [viewPointLocation setFrame:CGRectMake(334-50, 550-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Apath4
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:0.2f];
+    [viewPointLocation setFrame:CGRectMake(334-50, 521-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Bpath2
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:2.0f];
+    [viewPointLocation setFrame:CGRectMake(445-50, 247-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
+- (void) Bpath3
+{
+    [UIView beginAnimations:@"swipe" context:NULL];
+    [UIView setAnimationDuration:3.0f];
+    [viewPointLocation setFrame:CGRectMake(445-50, 458-50, 100, 100)];
+    [UIView commitAnimations];
+}
+
 - (void) createBeaconAtPoint:(NSString *) strPoint
 {
-    viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    if (viewPointLocation !=nil)
+    {
+        [viewPointLocation removeFromSuperview];
+    }
+    
+    if ([strPoint isEqualToString:@"A"])
+    {
+        viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(119-50, 438-50, 100, 100)];
+        
+        [UIView beginAnimations:@"swipe" context:NULL];
+        [UIView setAnimationDuration:0.2f];
+        [viewPointLocation setFrame:CGRectMake(145-50, 438-50, 100, 100)];
+        [UIView commitAnimations];
+        
+        [self performSelector:@selector(Apath2) withObject:nil afterDelay:0.4];
+        [self performSelector:@selector(Apath3) withObject:nil afterDelay:1.6];
+        [self performSelector:@selector(Apath4) withObject:nil afterDelay:4.8];
+        
+    }else if ([strPoint isEqualToString:@"B"])
+    {
+        viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(337-50, 216-50, 100, 100)];
+        
+        [UIView beginAnimations:@"swipe" context:NULL];
+        [UIView setAnimationDuration:1.0f];
+        [viewPointLocation setFrame:CGRectMake(337-50, 247-50, 100, 100)];
+        [UIView commitAnimations];
+        
+        [self performSelector:@selector(Bpath2) withObject:nil afterDelay:1.2];
+        [self performSelector:@selector(Bpath3) withObject:nil afterDelay:3.4];
+    }
     [viewMapRoute addSubview:viewPointLocation];
     
     UIImageView *imgArea = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationtracker_area.png"]];
@@ -252,8 +346,6 @@
     [imgPoint setFrame:CGRectMake(50-12, 50-12, 25+40-20, 25+40-20)];
     [imgPoint setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
     [viewPointLocation addSubview:imgPoint];
-    
-    
 }
 
 -(void) filterPlace:(NSString *)strText

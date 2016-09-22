@@ -29,6 +29,8 @@
 @property (nonatomic, retain) IBOutlet UITableView *tblPlace;
 @property (nonatomic, retain) IBOutlet UISearchBar *srcPlace;
 
+@property (nonatomic, retain) IBOutlet UILabel *lblPlaceTitle;
+
 //map
 @property (nonatomic, retain) IBOutlet UIView *viewMap;
 @property (nonatomic, retain) IBOutlet UIImageView *imgMap;
