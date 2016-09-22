@@ -65,6 +65,8 @@
     aryFilterBuddy = [[NSMutableArray alloc] init];
     
     [self filterPlace:@""];
+    
+    tmrAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animatePoint) userInfo:nil repeats:YES];
 }
 
 - (void)goMain
@@ -180,6 +182,7 @@
 -(IBAction)btnPath1:(id)sender
 {
     [self createPathStartPoint:@"B"];
+    [self createBeaconAtPoint:@"B"];
 }
 
 //Draw Path Way
@@ -221,34 +224,37 @@
     
 }
 
-/*-(IBAction)btnRemove:(id)sender
+- (void) animatePoint
 {
-    if(viewMapRoute!=nil)
-    {
-        [viewMapRoute removeFromSuperview];
-    }
+    if(++intAniCount>1000000)
+        intAniCount=0;
     
-    viewMapRoute = [[UIView alloc] initWithFrame:CGRectMake(0, 100, 320, 320)];
-    [viewMapRoute setBackgroundColor:[UIColor clearColor]];
-    [viewMapRoute setAlpha:0.5];
-    [viewPassengerAnnouncement addSubview:viewMapRoute];
+    int intLoop = 5-(((5-(intAniCount%10))*(5-(intAniCount%10)))/2);
+    [imgPoint setFrame:CGRectMake(0, 0, 22+intLoop+40-20, 22+intLoop+40-20)];
+    [imgPoint setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
+}
+
+- (void) createBeaconAtPoint:(NSString *) strPoint
+{
+    viewPointLocation = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [viewMapRoute addSubview:viewPointLocation];
     
-    [viewPassengerAnnouncement bringSubviewToFront:btnStation1];
-    [viewPassengerAnnouncement bringSubviewToFront:btnStation2];
-    [viewPassengerAnnouncement bringSubviewToFront:btnStation3];
-    [viewPassengerAnnouncement bringSubviewToFront:btnStation4];
+    UIImageView *imgArea = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationtracker_area.png"]];
+    [imgArea setFrame:CGRectMake(0, 0, 100, 100)];
+    [viewPointLocation addSubview:imgArea];
     
-    [btnStation1 setImage:[UIImage imageNamed:@"train_icon_select.png"] forState:UIControlStateNormal];
-    [btnStation2 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
-    [btnStation3 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
-    [btnStation4 setImage:[UIImage imageNamed:@"train_icon.png"] forState:UIControlStateNormal];
+    UIImageView *imgWhite = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationtracker_white.png"]];
+    [imgWhite setFrame:CGRectMake(50-12, 50-12, 25+45-25, 25+40-20)];
+    [imgWhite setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
+    [viewPointLocation addSubview:imgWhite];
     
-    [imgStation1 setImage:[UIImage imageNamed:@"station_name_select.png"]];
-    [imgStation2 setImage:[UIImage imageNamed:@"station_name.png"]];
-    [imgStation3 setImage:[UIImage imageNamed:@"station_name.png"]];
-    [imgStation4 setImage:[UIImage imageNamed:@"station_name.png"]];
-    [imgAd1 setImage:[UIImage imageNamed:@"ad1.png"]];
-}*/
+    imgPoint = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationtracker_blue.png"]];
+    [imgPoint setFrame:CGRectMake(50-12, 50-12, 25+40-20, 25+40-20)];
+    [imgPoint setCenter:CGPointMake(viewPointLocation.frame.size.width/2, viewPointLocation.frame.size.height/2)];
+    [viewPointLocation addSubview:imgPoint];
+    
+    
+}
 
 -(void) filterPlace:(NSString *)strText
 {

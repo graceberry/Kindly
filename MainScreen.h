@@ -14,7 +14,11 @@
     NSMutableArray *aryPlace, *aryFilterPlace;
     NSMutableArray *aryBuddy, *aryFilterBuddy;
     
-    UIView *viewMapRoute;
+    UIView *viewMapRoute, *viewPointLocation;
+    int intAniCount;
+    
+    NSTimer *tmrAnimation;
+    UIImageView *imgPoint;
 }
 
 //splash
