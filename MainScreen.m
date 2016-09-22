@@ -8,6 +8,10 @@
 
 #import "MainScreen.h"
 
+#define ZOOM_VIEW_TAG 100
+#define ZOOM_STEP 1.5
+#define degreesToRadian(x) (M_PI * (x) / 180.0)
+
 @interface MainScreen ()
 
 @end
@@ -143,10 +147,23 @@
         [viewMapRoute removeFromSuperview];
     }
     
-    viewMapRoute = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrMap.frame.size.width, scrMap.frame.size.height)];
-    [viewMapRoute setBackgroundColor:[UIColor redColor]];
-    [viewMapRoute setAlpha:0.5];
+    viewMapRoute = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 600, 800)];
+    [viewMapRoute setBackgroundColor:[UIColor clearColor]];
+    [viewMapRoute setAlpha:1];
     [scrMap addSubview:viewMapRoute];
+    
+    imgMap = [[UIImageView alloc] init];
+    [imgMap setFrame:CGRectMake(0, 0, viewMapRoute.frame.size.width, viewMapRoute.frame.size.height)];
+    [imgMap setImage:[UIImage imageNamed:@"event_map_1_resize.jpg"]];
+    [viewMapRoute addSubview:imgMap];
+    
+    // set the tag for the image view
+    [viewMapRoute setTag:ZOOM_VIEW_TAG];
+    
+    // calculate minimum scale to perfectly fit image width, and begin at that scale
+    float minimumScale = [scrMap frame].size.width  / [viewMapRoute frame].size.width;
+    [scrMap setMinimumZoomScale:minimumScale];
+    [scrMap setZoomScale:0.156250];
 }
 
 -(IBAction)btnBuddyList:(id)sender
@@ -162,31 +179,45 @@
 
 -(IBAction)btnPath1:(id)sender
 {
-    [self createPathStartPoint:CGPointMake(62, 220) withEndPoint:CGPointMake(62, 305) withColor:[UIColor blueColor] withStation:3];
+    [self createPathStartPoint:@"B"];
 }
 
 //Draw Path Way
-- (void)createPathStartPoint:(CGPoint)pointStartLocation withEndPoint:(CGPoint)pointEndLocation withColor:(UIColor *)pathColor withStation:(int)intStation
+- (void)createPathStartPoint:(NSString *)strPath
 {
     //Draw Path
     UIBezierPath *trackPath = [UIBezierPath bezierPath];
-    [trackPath moveToPoint:CGPointMake(pointStartLocation.x, pointStartLocation.y)];
-    [trackPath addLineToPoint:CGPointMake(pointEndLocation.x, pointEndLocation.y)];
+    
+    if ([strPath isEqualToString:@"A"])
+    {
+        [trackPath moveToPoint:CGPointMake(119, 438)];
+        [trackPath addLineToPoint:CGPointMake(145, 438)];
+        [trackPath addLineToPoint:CGPointMake(145, 550)];
+        [trackPath addLineToPoint:CGPointMake(334, 550)];
+        [trackPath addLineToPoint:CGPointMake(334, 521)];
+    }else if ([strPath isEqualToString:@"B"])
+    {
+        [trackPath moveToPoint:CGPointMake(337, 216)];
+        [trackPath addLineToPoint:CGPointMake(337, 247)];
+        [trackPath addLineToPoint:CGPointMake(445, 247)];
+        [trackPath addLineToPoint:CGPointMake(445, 458)];
+    }
     
     CAShapeLayer *centerline = [CAShapeLayer layer];
     [centerline setPath:trackPath.CGPath];
-    [centerline setStrokeColor:pathColor.CGColor];
+    [centerline setStrokeColor:[UIColor redColor].CGColor];
     [centerline setFillColor:[[UIColor clearColor] CGColor]];
     [centerline setLineWidth:10];
+    centerline.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:20], [NSNumber numberWithInt:10], nil];
     [viewMapRoute.layer addSublayer:centerline];
     
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    [animation setDuration:5];
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    [animation setAutoreverses:NO];
-    [animation setFromValue:[NSNumber numberWithFloat:0]];
-    [animation setToValue:[NSNumber numberWithFloat:1]];
-    [centerline addAnimation:animation forKey:@"animatePath"];
+    CABasicAnimation *dashAnimation;
+    dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
+    [dashAnimation setFromValue:[NSNumber numberWithFloat:30.0f]];
+    [dashAnimation setToValue:[NSNumber numberWithFloat:0.0f]];
+    [dashAnimation setDuration:0.75f];
+    [dashAnimation setRepeatCount:HUGE_VAL];
+    [centerline addAnimation:dashAnimation forKey:@"linePhase"];
     
 }
 
@@ -292,6 +323,40 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.view endEditing:YES];
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    NSLog(@"here");
+    return [viewMapRoute viewWithTag:ZOOM_VIEW_TAG];
+}
+
+/************************************** NOTE **************************************/
+/* The following delegate method works around a known bug in zoomToRect:animated: */
+/* In the next release after 3.0 this workaround will no longer be necessary      */
+/**********************************************************************************/
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    [scrollView setZoomScale:scale+0.01 animated:NO];
+    [scrollView setZoomScale:scale animated:NO];
+}
+
+#pragma mark Utility methods
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center
+{
+    
+    CGRect zoomRect;
+    // the zoom rect is in the content view's coordinates.
+    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
+    zoomRect.size.height = [scrMap frame].size.height / scale;
+    zoomRect.size.width  = [scrMap frame].size.width  / scale;
+    
+    // choose an origin so as to get the right center.
+    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
+    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
+    
+    return zoomRect;
 }
 
 - (void)didReceiveMemoryWarning {
