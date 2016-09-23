@@ -61,11 +61,11 @@
     [self.view addSubview:viewBuddy];
     
     [viewSplash setFrame:CGRectMake(0, 0, viewSplash.frame.size.width, viewSplash.frame.size.height)];
-    [viewSplash setHidden:YES];
+    [viewSplash setHidden:NO];
     [self.view addSubview:viewSplash];
     
     //splash
-    //[NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(goMain) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(goMain) userInfo:nil repeats:NO];
     
     //aryPlace = [[NSMutableArray alloc]initWithObjects:@"TEST 1",@"TEST 2",@"TEST 3", nil];
     aryPlace = [[NSMutableArray alloc] init];
