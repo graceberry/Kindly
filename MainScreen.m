@@ -117,30 +117,42 @@
 -(void) displayBuddyData
 {
     NSDictionary *dict1 = @{
-                            @"name": @"Mummy",
-                            @"image": @"place2.jpg",
+                            @"name": @"Aya",
+                            @"image": @"aya1.jpg",
                             @"status": @"Active"
                             };
     
     NSDictionary *dict2 = @{
-                            @"name": @"Taylor Swift",
-                            @"image": @"place2.jpg",
+                            @"name": @"Barry Allen",
+                            @"image": @"barryallen.jpg",
                             @"status": @"Inactive"
                             };
     
     NSDictionary *dict3 = @{
-                            @"name": @"Princess",
-                            @"image": @"place3.jpg",
+                            @"name": @"Caitly Snow",
+                            @"image": @"caitlynsnow.jpg",
                             @"status": @"Inactive"
                             };
     
     NSDictionary *dict4 = @{
-                            @"name": @"Cammy Tang",
-                            @"image": @"place4.jpg",
+                            @"name": @"Harrison Wells",
+                            @"image": @"harrisonwells.jpeg",
+                            @"status": @"Active"
+                            };
+    
+    NSDictionary *dict5 = @{
+                            @"name": @"Tony Stark",
+                            @"image": @"Iron-man-site-tony-stark.jpg.jpg",
                             @"status": @"Inactive"
                             };
     
-    aryBuddy = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, dict4, nil];
+    NSDictionary *dict6 = @{
+                            @"name": @"Jay Chou",
+                            @"image": @"Jay Chou_0.jpg",
+                            @"status": @"Inactive"
+                            };
+    
+    aryBuddy = [NSMutableArray arrayWithObjects: dict1, dict2, dict3, dict4, dict5, dict6, nil];
     
     [self filterBuddy:@""];
 }

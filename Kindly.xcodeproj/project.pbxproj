@@ -23,6 +23,13 @@
 		CC2199341D94933A00F49A29 /* popup_ice_cream.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199311D94933A00F49A29 /* popup_ice_cream.png */; };
 		CC2199351D94933A00F49A29 /* popup_burger.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199321D94933A00F49A29 /* popup_burger.png */; };
 		CC2199361D94933A00F49A29 /* popup_popcorn.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199331D94933A00F49A29 /* popup_popcorn.png */; };
+		CC2199381D94AD9100F49A29 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2199371D94AD9100F49A29 /* Icon-152.png */; };
+		CC21993B1D94BE0000F49A29 /* aya1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC21993A1D94BE0000F49A29 /* aya1.jpg */; };
+		CC21993D1D94BE0700F49A29 /* barryallen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC21993C1D94BE0700F49A29 /* barryallen.jpg */; };
+		CC21993F1D94BE0F00F49A29 /* caitlynsnow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC21993E1D94BE0F00F49A29 /* caitlynsnow.jpg */; };
+		CC2199411D94BE1A00F49A29 /* harrisonwells.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC2199401D94BE1A00F49A29 /* harrisonwells.jpeg */; };
+		CC2199431D94BE2300F49A29 /* Iron-man-site-tony-stark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC2199421D94BE2300F49A29 /* Iron-man-site-tony-stark.jpg */; };
+		CC2199451D94BE2B00F49A29 /* Jay Chou_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC2199441D94BE2B00F49A29 /* Jay Chou_0.jpg */; };
 		CCCE564F1D93E3F700D38A3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE564E1D93E3F700D38A3F /* main.m */; };
 		CCCE56521D93E3F800D38A3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE56511D93E3F800D38A3F /* AppDelegate.m */; };
 		CCCE56551D93E3F800D38A3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE56541D93E3F800D38A3F /* ViewController.m */; };
@@ -47,6 +54,13 @@
 		CC2199311D94933A00F49A29 /* popup_ice_cream.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_ice_cream.png; sourceTree = "<group>"; };
 		CC2199321D94933A00F49A29 /* popup_burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_burger.png; sourceTree = "<group>"; };
 		CC2199331D94933A00F49A29 /* popup_popcorn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popup_popcorn.png; sourceTree = "<group>"; };
+		CC2199371D94AD9100F49A29 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
+		CC21993A1D94BE0000F49A29 /* aya1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = aya1.jpg; sourceTree = "<group>"; };
+		CC21993C1D94BE0700F49A29 /* barryallen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barryallen.jpg; sourceTree = "<group>"; };
+		CC21993E1D94BE0F00F49A29 /* caitlynsnow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = caitlynsnow.jpg; sourceTree = "<group>"; };
+		CC2199401D94BE1A00F49A29 /* harrisonwells.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = harrisonwells.jpeg; sourceTree = "<group>"; };
+		CC2199421D94BE2300F49A29 /* Iron-man-site-tony-stark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Iron-man-site-tony-stark.jpg"; sourceTree = "<group>"; };
+		CC2199441D94BE2B00F49A29 /* Jay Chou_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Jay Chou_0.jpg"; sourceTree = "<group>"; };
 		CCCE564A1D93E3F700D38A3F /* Kindly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCCE564E1D93E3F700D38A3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCCE56501D93E3F700D38A3F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +85,7 @@
 		CC2198FD1D93E50900F49A29 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				CC2199371D94AD9100F49A29 /* Icon-152.png */,
 				CC2199061D93E88F00F49A29 /* SplashScreen */,
 				CC2199051D93E88200F49A29 /* MainScreen */,
 			);
@@ -80,6 +95,7 @@
 		CC2199051D93E88200F49A29 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				CC2199391D94BDE400F49A29 /* buddy */,
 				CC2199281D9476C000F49A29 /* general */,
 				CC21991B1D94728700F49A29 /* place */,
 				CC2198FE1D93E52100F49A29 /* MainScreen.h */,
@@ -121,6 +137,19 @@
 				CC2199171D946ACE00F49A29 /* list_button.png */,
 			);
 			name = general;
+			sourceTree = "<group>";
+		};
+		CC2199391D94BDE400F49A29 /* buddy */ = {
+			isa = PBXGroup;
+			children = (
+				CC21993A1D94BE0000F49A29 /* aya1.jpg */,
+				CC21993C1D94BE0700F49A29 /* barryallen.jpg */,
+				CC21993E1D94BE0F00F49A29 /* caitlynsnow.jpg */,
+				CC2199401D94BE1A00F49A29 /* harrisonwells.jpeg */,
+				CC2199421D94BE2300F49A29 /* Iron-man-site-tony-stark.jpg */,
+				CC2199441D94BE2B00F49A29 /* Jay Chou_0.jpg */,
+			);
+			name = buddy;
 			sourceTree = "<group>";
 		};
 		CCCE56411D93E3F700D38A3F = {
@@ -220,20 +249,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC2199451D94BE2B00F49A29 /* Jay Chou_0.jpg in Resources */,
 				CC2199021D93E52100F49A29 /* MainScreen.xib in Resources */,
+				CC2199381D94AD9100F49A29 /* Icon-152.png in Resources */,
 				CC2199341D94933A00F49A29 /* popup_ice_cream.png in Resources */,
+				CC21993D1D94BE0700F49A29 /* barryallen.jpg in Resources */,
 				CC2199251D94769600F49A29 /* place3.jpg in Resources */,
 				CC2199181D946ACE00F49A29 /* list_button.png in Resources */,
 				CC2199241D94769600F49A29 /* place2.jpg in Resources */,
 				CC2199141D944F6F00F49A29 /* locationtracker_blue.png in Resources */,
 				CC21992A1D94773100F49A29 /* place4 in Resources */,
+				CC2199411D94BE1A00F49A29 /* harrisonwells.jpeg in Resources */,
 				CCCE565A1D93E3F800D38A3F /* Assets.xcassets in Resources */,
 				CC2199361D94933A00F49A29 /* popup_popcorn.png in Resources */,
 				CC2199041D93E56A00F49A29 /* Default-568h@2x.png in Resources */,
 				CC2199101D943F8000F49A29 /* event_map_1_resize.jpg in Resources */,
 				CC2199161D944F7700F49A29 /* locationtracker_area.png in Resources */,
+				CC21993B1D94BE0000F49A29 /* aya1.jpg in Resources */,
 				CC2199351D94933A00F49A29 /* popup_burger.png in Resources */,
+				CC2199431D94BE2300F49A29 /* Iron-man-site-tony-stark.jpg in Resources */,
 				CC21991A1D946AD500F49A29 /* map_button.png in Resources */,
+				CC21993F1D94BE0F00F49A29 /* caitlynsnow.jpg in Resources */,
 				CC2199121D944F6700F49A29 /* locationtracker_white.png in Resources */,
 				CC2199271D9476A100F49A29 /* place1.jpg in Resources */,
 			);
